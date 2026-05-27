@@ -56,7 +56,7 @@ export function Sidebar() {
 
         <button
           onClick={toggleSidebar}
-          className="flex items-center gap-2 h-9 px-2.5 rounded-[var(--radius-md)] text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-white/05 transition-colors cursor-pointer mt-1"
+          className="flex items-center gap-2 h-9 px-2.5 rounded-[var(--radius-md)] text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-2)] transition-colors cursor-pointer mt-1"
         >
           <PanelLeft size={16} />
           <AnimatePresence>
@@ -90,8 +90,8 @@ function NavButton({
       className={cn(
         'flex items-center gap-2 h-9 px-2.5 rounded-[var(--radius-md)] transition-colors cursor-pointer text-left w-full',
         item.active
-          ? 'bg-[var(--color-accent-dim)] text-[var(--color-accent)]'
-          : 'text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-white/05'
+          ? 'bg-[var(--color-accent-dim)] text-[var(--color-accent-text)]'
+          : 'text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-2)]'
       )}
     >
       <span className="flex-shrink-0">{item.icon}</span>

@@ -48,7 +48,7 @@ export function CreateRoomModal() {
                   'w-9 h-9 rounded-[var(--radius-md)] text-lg flex items-center justify-center transition-all cursor-pointer',
                   selectedIcon === icon
                     ? 'bg-[var(--color-accent-dim)] border border-[var(--color-accent)]/40 scale-110'
-                    : 'bg-[var(--color-surface-2)] border border-[var(--color-border)] hover:border-white/20'
+                    : 'bg-[var(--color-surface-2)] border border-[var(--color-border)] hover:border-[var(--color-border-strong)]'
                 )}
               >
                 {icon}
@@ -67,7 +67,7 @@ export function CreateRoomModal() {
                 className={cn(
                   'w-7 h-7 rounded-full transition-all cursor-pointer border-2',
                   selectedColor === color
-                    ? 'scale-125 border-white/60'
+                    ? 'scale-125 border-[var(--color-text)]'
                     : 'border-transparent hover:scale-110'
                 )}
                 style={{ backgroundColor: color }}

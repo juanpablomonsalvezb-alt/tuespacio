@@ -14,13 +14,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           'inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] font-medium transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none',
           {
-            'bg-[var(--color-surface-2)] text-[var(--color-text)] hover:bg-white/10 border border-[var(--color-border)]':
+            'bg-[var(--color-surface-2)] text-[var(--color-text)] hover:bg-[var(--color-surface-hover)] border border-[var(--color-border)] shadow-[var(--shadow-sm)]':
               variant === 'default',
-            'text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-white/05':
+            'text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-2)]':
               variant === 'ghost',
-            'border border-[var(--color-border)] text-[var(--color-text)] hover:border-white/20 hover:bg-white/05':
+            'border border-[var(--color-border)] text-[var(--color-text)] hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface-2)]':
               variant === 'outline',
-            'bg-[var(--color-accent)] text-[#0e0e10] hover:opacity-90 font-semibold':
+            'bg-[var(--color-text)] text-white hover:opacity-90 font-semibold shadow-[var(--shadow-md)]':
               variant === 'accent',
           },
           {

@@ -37,8 +37,8 @@ export function RoomCard({ room, isActive }: RoomCardProps) {
         'relative rounded-[var(--radius-lg)] border overflow-hidden cursor-pointer group',
         'bg-[var(--color-surface)] transition-colors duration-200',
         isActive
-          ? 'border-[var(--color-accent)]/40 shadow-[0_0_0_1px_var(--color-accent)/20]'
-          : 'border-[var(--color-border)] hover:border-white/15'
+          ? 'border-[var(--color-accent)] shadow-[var(--shadow-md)]'
+          : 'border-[var(--color-border)] hover:border-[var(--color-border-strong)] hover:shadow-[var(--shadow-md)]'
       )}
       onClick={() => setActiveRoom(room.id)}
     >
@@ -62,7 +62,7 @@ export function RoomCard({ room, isActive }: RoomCardProps) {
                   className={cn(
                     'text-[10px]',
                     room.status === 'active'
-                      ? 'text-emerald-400'
+                      ? 'text-emerald-600'
                       : 'text-[var(--color-muted)]'
                   )}
                 >
@@ -80,26 +80,26 @@ export function RoomCard({ room, isActive }: RoomCardProps) {
           <div ref={menuRef} className="relative">
             <button
               onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen) }}
-              className="opacity-0 group-hover:opacity-100 h-6 w-6 rounded flex items-center justify-center text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-white/10 transition-all cursor-pointer"
+              className="opacity-0 group-hover:opacity-100 h-6 w-6 rounded flex items-center justify-center text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-2)] transition-all cursor-pointer"
             >
               <MoreHorizontal size={14} />
             </button>
 
             {menuOpen && (
               <div
-                className="absolute right-0 top-7 z-20 w-36 bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded-[var(--radius-md)] py-1 shadow-xl"
+                className="absolute right-0 top-7 z-20 w-36 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-md)] py-1 shadow-[var(--shadow-lg)]"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button
                   onClick={() => { openEditRoom(room.id); setMenuOpen(false) }}
-                  className="flex items-center gap-2 w-full px-3 py-2 text-xs text-[var(--color-text)] hover:bg-white/05 cursor-pointer"
+                  className="flex items-center gap-2 w-full px-3 py-2 text-xs text-[var(--color-text)] hover:bg-[var(--color-surface-hover)] cursor-pointer"
                 >
                   <Pencil size={12} />
                   Editar cuarto
                 </button>
                 <button
                   onClick={() => { deleteRoom(room.id); setMenuOpen(false) }}
-                  className="flex items-center gap-2 w-full px-3 py-2 text-xs text-red-400 hover:bg-red-500/10 cursor-pointer"
+                  className="flex items-center gap-2 w-full px-3 py-2 text-xs text-red-500 hover:bg-red-50 cursor-pointer"
                 >
                   <Trash2 size={12} />
                   Eliminar
@@ -118,7 +118,7 @@ export function RoomCard({ room, isActive }: RoomCardProps) {
                 className={cn(
                   'flex items-center gap-1 h-5 px-1.5 rounded-full text-[10px]',
                   tool.connected
-                    ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20'
+                    ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
                     : 'bg-[var(--color-surface-2)] text-[var(--color-muted)] border border-[var(--color-border)]'
                 )}
               >

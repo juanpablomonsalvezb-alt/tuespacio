@@ -55,7 +55,7 @@ export function RoomGrid() {
         <motion.div variants={itemVariants}>
           <button
             onClick={openCreateRoom}
-            className="w-full rounded-[var(--radius-lg)] border border-dashed border-[var(--color-border)] p-4 text-[var(--color-muted)] hover:text-[var(--color-text)] hover:border-white/20 transition-colors cursor-pointer flex flex-col items-center justify-center gap-2 min-h-[120px]"
+            className="w-full rounded-[var(--radius-lg)] border border-dashed border-[var(--color-border)] p-4 text-[var(--color-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface-2)] transition-colors cursor-pointer flex flex-col items-center justify-center gap-2 min-h-[120px]"
           >
             <Plus size={20} />
             <span className="text-xs">Crear cuarto</span>

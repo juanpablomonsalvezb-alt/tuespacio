@@ -60,7 +60,7 @@ export function SettingsPanel() {
                   className="w-6 h-6 rounded-full border-2 transition-all cursor-pointer hover:scale-110"
                   style={{
                     backgroundColor: c,
-                    borderColor: accentColor === c ? 'white' : 'transparent',
+                    borderColor: accentColor === c ? 'var(--color-text)' : 'transparent',
                     transform: accentColor === c ? 'scale(1.2)' : undefined,
                   }}
                 />

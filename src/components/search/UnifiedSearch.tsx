@@ -32,7 +32,7 @@ export function UnifiedSearch() {
 
   return (
     <div className="relative w-full max-w-xl">
-      <div className="flex items-center gap-0 rounded-[var(--radius-lg)] bg-[var(--color-surface)] border border-[var(--color-border)] focus-within:border-[var(--color-accent)]/50 transition-colors overflow-hidden">
+      <div className="flex items-center gap-0 rounded-[var(--radius-lg)] bg-[var(--color-surface)] border border-[var(--color-border)] focus-within:border-[var(--color-border-strong)] focus-within:shadow-[var(--shadow-md)] transition-all overflow-hidden shadow-[var(--shadow-sm)]">
         {/* Engine selector */}
         <button
           onClick={() => setEnginePickerOpen(!enginePickerOpen)}
@@ -72,7 +72,7 @@ export function UnifiedSearch() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-            className="absolute top-full left-0 mt-2 w-48 bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded-[var(--radius-lg)] py-1.5 z-30 shadow-xl"
+            className="absolute top-full left-0 mt-2 w-48 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-lg)] py-1.5 z-30 shadow-[var(--shadow-lg)]"
           >
             {SEARCH_ENGINES.map((engine) => (
               <button
@@ -81,8 +81,8 @@ export function UnifiedSearch() {
                 className={cn(
                   'flex items-center gap-2.5 w-full px-3 py-2 text-sm cursor-pointer transition-colors',
                   engine.id === selectedEngineId
-                    ? 'bg-white/05'
-                    : 'text-[var(--color-text)] hover:bg-white/05'
+                    ? 'bg-[var(--color-surface-hover)]'
+                    : 'text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'
                 )}
               >
                 <span
