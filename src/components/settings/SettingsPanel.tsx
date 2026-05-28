@@ -1,16 +1,22 @@
-import { Modal } from '@/components/ui/Modal'
+import { Drawer } from '@/components/ui/Drawer'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { useUIStore } from '@/stores/useUIStore'
 import { useUserStore } from '@/stores/useUserStore'
+import { toast } from 'sonner'
 
 export function SettingsPanel() {
   const { settingsOpen, closeSettings } = useUIStore()
   const { name, accentColor, city, spaceName, setName, setAccentColor, setCity, setSpaceName } =
     useUserStore()
 
+  const handleSave = () => {
+    closeSettings()
+    toast.success('Configuración guardada')
+  }
+
   return (
-    <Modal open={settingsOpen} onClose={closeSettings} title="Configuración" className="max-w-lg">
+    <Drawer open={settingsOpen} onClose={closeSettings} title="Configuración">
       <div className="space-y-6">
         {/* Identidad */}
         <div>
@@ -80,10 +86,10 @@ export function SettingsPanel() {
           </div>
         </div>
 
-        <Button variant="accent" onClick={closeSettings}>
+        <Button variant="accent" onClick={handleSave} className="w-full">
           Guardar cambios
         </Button>
       </div>
-    </Modal>
+    </Drawer>
   )
 }

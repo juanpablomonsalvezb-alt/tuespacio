@@ -1,15 +1,17 @@
 import { useState } from 'react'
-import { Modal } from '@/components/ui/Modal'
+import { Drawer } from '@/components/ui/Drawer'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { useWorkspaceStore } from '@/stores/useWorkspaceStore'
 import { useUIStore } from '@/stores/useUIStore'
 import { DEFAULT_ROOM_COLORS, DEFAULT_ROOM_ICONS } from '@/lib/constants'
 import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
 
 export function CreateRoomModal() {
   const { createRoomOpen, closeCreateRoom } = useUIStore()
   const { createRoom, setActiveRoom } = useWorkspaceStore()
+  const setView = useUIStore((s) => s.setView)
 
   const [name, setName] = useState('')
   const [selectedIcon, setSelectedIcon] = useState(DEFAULT_ROOM_ICONS[0])
@@ -23,10 +25,12 @@ export function CreateRoomModal() {
     setSelectedIcon(DEFAULT_ROOM_ICONS[0])
     setSelectedColor(DEFAULT_ROOM_COLORS[0])
     closeCreateRoom()
+    setView('room')
+    toast.success(`Cuarto "${room.name}" creado`)
   }
 
   return (
-    <Modal open={createRoomOpen} onClose={closeCreateRoom} title="Nuevo cuarto">
+    <Drawer open={createRoomOpen} onClose={closeCreateRoom} title="Nuevo cuarto">
       <div className="flex flex-col gap-4">
         <Input
           label="Nombre del cuarto"
@@ -77,13 +81,14 @@ export function CreateRoomModal() {
         </div>
 
         {/* Preview */}
-        <div className="flex items-center gap-2 p-3 rounded-[var(--radius-md)] bg-[var(--color-surface-2)] border border-[var(--color-border)]">
+        <div className="flex items-center gap-3 p-4 rounded-[var(--radius-lg)] bg-[var(--color-surface-2)] border border-[var(--color-border)]">
           <div
-            className="w-0.5 h-8 rounded-full flex-shrink-0"
-            style={{ backgroundColor: selectedColor }}
-          />
-          <span className="text-xl">{selectedIcon}</span>
-          <span className="text-sm text-[var(--color-text)]">
+            className="flex items-center justify-center w-10 h-10 rounded-xl text-xl"
+            style={{ backgroundColor: `color-mix(in srgb, ${selectedColor} 14%, var(--color-surface))` }}
+          >
+            {selectedIcon}
+          </div>
+          <span className="text-sm font-medium text-[var(--color-text)]">
             {name || 'Nombre del cuarto'}
           </span>
         </div>
@@ -95,6 +100,6 @@ export function CreateRoomModal() {
           </Button>
         </div>
       </div>
-    </Modal>
+    </Drawer>
   )
 }
