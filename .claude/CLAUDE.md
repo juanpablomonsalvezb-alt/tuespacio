@@ -1,8 +1,14 @@
 # tuespacio — Instrucciones del proyecto
 
-## Filosofía de diseño
+## ⚠️ PRODUCTO (pivote mayo 2026)
+tuespacio = **Cuarto de Control de Agentes**: inbox calmo cross-vendor donde un dev ve qué hacen sus agentes AI (Claude Code, Cursor, MCP, webhooks), qué terminó, qué pide aprobación, qué falló. NO es dashboard personal / Notion / new-tab. Es herramienta dev densa en datos. Detalle: `memory/project_tuespacio_pivot.md`.
 
-Este proyecto sigue la filosofía de diseño de **Emil Kowalski** (Design Engineer en Linear).
+## ⚠️ DISEÑO = LEY: leer `DESIGN.md` ANTES de tocar UI
+`/Users/juanpablomonsalvez/tuespacio/DESIGN.md` es la constitución de diseño. Referencia ÚNICA: **Linear**, dark-first, densidad = estética. Revisar el **checklist de rechazo de 15 ítems** contra CADA pantalla antes de entregar. Si falla un ítem, no se entrega. El diseño salía genérico por ausencia de sistema — DESIGN.md es el sistema.
+
+## Filosofía de diseño (complementa DESIGN.md)
+
+Este proyecto sigue la filosofía de **Emil Kowalski** (Design Engineer en Linear) — coherente con la referencia Linear de DESIGN.md.
 El skill file completo está en `.claude/skills/emil-design-eng.md`.
 
 ### Reglas clave activas:
