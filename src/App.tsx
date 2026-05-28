@@ -1,6 +1,7 @@
 import { useEffect, useCallback } from 'react'
 import { LazyMotion, domAnimation, AnimatePresence } from 'motion/react'
 import { Toaster } from 'sonner'
+import { AuroraBackground } from '@/components/home/AuroraBackground'
 import { HomeCanvas } from '@/components/home/HomeCanvas'
 import { RoomView } from '@/components/room/RoomView'
 import { CommandPalette } from '@/components/search/CommandPalette'
@@ -79,6 +80,7 @@ function App() {
 
   return (
     <LazyMotion features={domAnimation}>
+      <AuroraBackground />
       <div className="h-full ambient-bg cursor-glow">
         <AnimatePresence mode="wait">
           {view === 'home' ? (
