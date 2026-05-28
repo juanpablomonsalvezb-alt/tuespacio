@@ -1,23 +1,48 @@
-import { LazyMotion, domAnimation } from 'motion/react'
-import { TopBar } from '@/components/layout/TopBar'
-import { Sidebar } from '@/components/layout/Sidebar'
-import { MainArea } from '@/components/layout/MainArea'
-import { RightPanel } from '@/components/layout/RightPanel'
+import { useEffect, useCallback } from 'react'
+import { LazyMotion, domAnimation, AnimatePresence } from 'motion/react'
+import { HomeCanvas } from '@/components/home/HomeCanvas'
+import { RoomView } from '@/components/room/RoomView'
+import { CommandPalette } from '@/components/search/CommandPalette'
 import { CreateRoomModal } from '@/components/rooms/CreateRoomModal'
 import { SettingsPanel } from '@/components/settings/SettingsPanel'
+import { useUIStore } from '@/stores/useUIStore'
 
 function App() {
+  const view = useUIStore((s) => s.view)
+  const toggleCommandPalette = useUIStore((s) => s.toggleCommandPalette)
+
+  // Global Cmd+K shortcut
+  const handleGlobalKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault()
+        toggleCommandPalette()
+      }
+    },
+    [toggleCommandPalette]
+  )
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleGlobalKeyDown)
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown)
+  }, [handleGlobalKeyDown])
+
   return (
     <LazyMotion features={domAnimation}>
-      <div className="flex flex-col h-full bg-[var(--color-bg)]">
-        <TopBar />
-        <div className="flex flex-1 overflow-hidden">
-          <Sidebar />
-          <MainArea />
-          <RightPanel />
-        </div>
+      <div className="h-full bg-[var(--color-bg)]">
+        <AnimatePresence mode="wait">
+          {view === 'home' ? (
+            <HomeCanvas key="home" />
+          ) : (
+            <RoomView key="room" />
+          )}
+        </AnimatePresence>
       </div>
 
+      {/* Command Palette (Cmd+K) — always mounted for AnimatePresence */}
+      <CommandPalette />
+
+      {/* Modals */}
       <CreateRoomModal />
       <SettingsPanel />
     </LazyMotion>

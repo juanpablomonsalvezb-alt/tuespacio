@@ -11,10 +11,10 @@ export function SettingsPanel() {
 
   return (
     <Modal open={settingsOpen} onClose={closeSettings} title="Configuración" className="max-w-lg">
-      <div className="flex flex-col gap-5">
+      <div className="space-y-6">
         {/* Identidad */}
         <div>
-          <div className="text-xs uppercase tracking-widest text-[var(--color-muted)] mb-3">
+          <div className="text-xs uppercase tracking-widest text-[var(--color-muted)] mb-3 font-medium">
             Identidad
           </div>
           <div className="flex flex-col gap-3">
@@ -41,7 +41,7 @@ export function SettingsPanel() {
 
         {/* Apariencia */}
         <div>
-          <div className="text-xs uppercase tracking-widest text-[var(--color-muted)] mb-3">
+          <div className="text-xs uppercase tracking-widest text-[var(--color-muted)] mb-3 font-medium">
             Apariencia
           </div>
           <div className="flex items-center gap-3">
