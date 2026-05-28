@@ -3,6 +3,7 @@ import { persist, createJSONStorage } from 'zustand/middleware'
 import type { Room, RoomSession, SearchEngine } from '@/types'
 import { generateId } from '@/lib/utils'
 import { DEFAULT_ROOM_COLORS, DEFAULT_ROOM_ICONS } from '@/lib/constants'
+import { normalizeRoomIcon } from '@/lib/icons'
 
 interface WorkspaceState {
   rooms: Room[]
@@ -25,7 +26,7 @@ const DEFAULT_ROOMS: Room[] = [
     id: 'trabajo-ia',
     name: 'Trabajo IA',
     color: DEFAULT_ROOM_COLORS[0],
-    icon: '🤖',
+    icon: 'ai',
     tools: [
       { id: 'claude', name: 'Claude', url: 'https://claude.ai', icon: '🤖', connected: true },
       { id: 'gemini', name: 'Gemini', url: 'https://gemini.google.com', icon: '✨', connected: false },
@@ -38,7 +39,7 @@ const DEFAULT_ROOMS: Room[] = [
     id: 'contenido',
     name: 'Contenido',
     color: DEFAULT_ROOM_COLORS[1],
-    icon: '🎨',
+    icon: 'design',
     tools: [
       { id: 'youtube', name: 'YouTube', url: 'https://youtube.com', icon: '▶️', connected: false },
       { id: 'spotify', name: 'Spotify', url: 'https://open.spotify.com', icon: '🎵', connected: false },
@@ -51,7 +52,7 @@ const DEFAULT_ROOMS: Room[] = [
     id: 'estudio',
     name: 'Estudio',
     color: DEFAULT_ROOM_COLORS[2],
-    icon: '📚',
+    icon: 'study',
     tools: [
       { id: 'notion', name: 'Notion', url: 'https://notion.so', icon: '📝', connected: false },
       { id: 'github', name: 'GitHub', url: 'https://github.com', icon: '🐙', connected: false },
@@ -161,8 +162,19 @@ export const useWorkspaceStore = create<WorkspaceState>()(
     }),
     {
       name: 'tuespacio-workspace',
-      version: 1,
+      version: 2,
       storage: createJSONStorage(() => localStorage),
+      migrate: (persisted: unknown, fromVersion: number) => {
+        const state = persisted as WorkspaceState
+        if (fromVersion < 2 && state?.rooms) {
+          // Upgrade legacy emoji room icons → Lucide keys
+          state.rooms = state.rooms.map((r) => ({
+            ...r,
+            icon: normalizeRoomIcon(r.icon),
+          }))
+        }
+        return state
+      },
       partialize: (state) => ({
         rooms: state.rooms.map((r) => ({
           ...r,

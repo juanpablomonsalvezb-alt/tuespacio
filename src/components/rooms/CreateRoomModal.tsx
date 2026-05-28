@@ -6,6 +6,7 @@ import { useWorkspaceStore } from '@/stores/useWorkspaceStore'
 import { useUIStore } from '@/stores/useUIStore'
 import { DEFAULT_ROOM_COLORS, DEFAULT_ROOM_ICONS } from '@/lib/constants'
 import { cn } from '@/lib/utils'
+import { RoomIcon } from '@/lib/icons'
 import { toast } from 'sonner'
 
 export function CreateRoomModal() {
@@ -49,13 +50,13 @@ export function CreateRoomModal() {
                 key={icon}
                 onClick={() => setSelectedIcon(icon)}
                 className={cn(
-                  'w-9 h-9 rounded-[var(--radius-md)] text-lg flex items-center justify-center transition-all cursor-pointer',
+                  'w-9 h-9 rounded-[var(--radius-md)] flex items-center justify-center transition-all cursor-pointer',
                   selectedIcon === icon
-                    ? 'bg-[var(--color-accent-dim)] border border-[var(--color-accent)]/40 scale-110'
-                    : 'bg-[var(--color-surface-2)] border border-[var(--color-border)] hover:border-[var(--color-border-strong)]'
+                    ? 'bg-[var(--color-accent-dim)] border border-[var(--color-accent)]/40 scale-110 text-[var(--color-accent-text)]'
+                    : 'bg-[var(--color-surface-2)] border border-[var(--color-border)] hover:border-[var(--color-border-strong)] text-[var(--color-text-secondary)]'
                 )}
               >
-                {icon}
+                <RoomIcon icon={icon} size={18} strokeWidth={1.7} />
               </button>
             ))}
           </div>
@@ -83,10 +84,13 @@ export function CreateRoomModal() {
         {/* Preview */}
         <div className="flex items-center gap-3 p-4 rounded-[var(--radius-lg)] bg-[var(--color-surface-2)] border border-[var(--color-border)]">
           <div
-            className="flex items-center justify-center w-10 h-10 rounded-xl text-xl"
-            style={{ backgroundColor: `color-mix(in srgb, ${selectedColor} 14%, var(--color-surface))` }}
+            className="flex items-center justify-center w-10 h-10 rounded-xl"
+            style={{
+              backgroundColor: `color-mix(in srgb, ${selectedColor} 14%, var(--color-surface))`,
+              color: selectedColor,
+            }}
           >
-            {selectedIcon}
+            <RoomIcon icon={selectedIcon} size={20} strokeWidth={1.7} />
           </div>
           <span className="text-sm font-medium text-[var(--color-text)]">
             {name || 'Nombre del cuarto'}

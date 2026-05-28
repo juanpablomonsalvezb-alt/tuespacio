@@ -5,6 +5,7 @@ import { useWorkspaceStore } from '@/stores/useWorkspaceStore'
 import { useUIStore } from '@/stores/useUIStore'
 import { useEffect, useCallback, useState } from 'react'
 import { cn } from '@/lib/utils'
+import { ToolIcon, RoomIcon, Wrench } from '@/lib/icons'
 
 /** Descriptions per tool type — adds context to bento tiles */
 const TOOL_DESCRIPTIONS: Record<string, string> = {
@@ -131,8 +132,12 @@ export function RoomView() {
             size={15}
             className="text-[var(--color-muted)] group-hover:text-[var(--color-text)] transition-colors duration-150"
           />
-          <span className="text-3xl leading-none" aria-hidden>
-            {room.icon}
+          <span
+            className="flex items-center justify-center leading-none"
+            style={{ color: room.color }}
+            aria-hidden
+          >
+            <RoomIcon icon={room.icon} size={20} strokeWidth={1.7} />
           </span>
           <span className="text-sm font-medium text-[var(--color-text)]">
             {room.name}
@@ -215,11 +220,9 @@ export function RoomView() {
                     </m.button>
                   </div>
 
-                  {/* Icon + name + description */}
-                  <div>
-                    <span className={cn('block', isLarge ? 'text-5xl' : 'text-4xl')}>
-                      {tool.icon}
-                    </span>
+                  {/* Brand logo */}
+                  <div className="flex">
+                    <ToolIcon id={tool.id} size={isLarge ? 40 : 32} />
                   </div>
                   <div className="mt-auto pt-3">
                     <span
@@ -249,7 +252,7 @@ export function RoomView() {
                 transition={{ delay: 0.3 }}
                 className="col-span-full flex flex-col items-center justify-center py-20 text-center"
               >
-                <span className="text-5xl mb-4">🔧</span>
+                <Wrench size={40} strokeWidth={1.4} className="text-[var(--color-muted)] mb-4" />
                 <p className="text-sm text-[var(--color-muted)] max-w-xs">
                   Este cuarto aún no tiene herramientas.
                 </p>
@@ -259,13 +262,13 @@ export function RoomView() {
         </div>
       </div>
 
-      {/* Watermark emoji — personality without clutter */}
+      {/* Watermark icon — personality without clutter */}
       <div
-        className="absolute bottom-[-20px] right-[-20px] text-[200px] leading-none opacity-[0.03] select-none pointer-events-none z-0"
-        style={{ transform: 'rotate(-15deg)' }}
+        className="absolute bottom-[-40px] right-[-40px] select-none pointer-events-none z-0"
+        style={{ transform: 'rotate(-12deg)', color: room.color, opacity: 0.05 }}
         aria-hidden
       >
-        {room.icon}
+        <RoomIcon icon={room.icon} size={300} strokeWidth={1} />
       </div>
     </m.div>
   )

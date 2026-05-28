@@ -5,6 +5,7 @@ import { SEARCH_ENGINES } from '@/lib/constants'
 import { useWorkspaceStore } from '@/stores/useWorkspaceStore'
 import { useUIStore } from '@/stores/useUIStore'
 import { cn } from '@/lib/utils'
+import { ToolIcon } from '@/lib/icons'
 import type { SearchEngine } from '@/types'
 
 export function CommandPalette() {
@@ -140,17 +141,9 @@ export function CommandPalette() {
                         : undefined
                     }
                   >
-                    <span
-                      className={cn(
-                        'w-1.5 h-1.5 rounded-full',
-                        engine.id === selectedEngineId ? 'bg-white/60' : ''
-                      )}
-                      style={
-                        engine.id !== selectedEngineId
-                          ? { backgroundColor: engine.color }
-                          : undefined
-                      }
-                    />
+                    <span className="flex items-center justify-center w-4 h-4">
+                      <ToolIcon id={engine.id} size={14} />
+                    </span>
                     {engine.name}
                   </m.button>
                 ))}

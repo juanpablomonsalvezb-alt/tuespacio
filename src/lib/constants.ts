@@ -8,7 +8,11 @@ export const SEARCH_ENGINES: SearchEngineConfig[] = [
   { id: 'google', name: 'Google', url: 'https://www.google.com/search?q=', color: '#ea4335' },
 ]
 
-export const DEFAULT_ROOM_ICONS = ['🏠', '💼', '🎨', '📚', '🎵', '🌐', '⚡', '🔬', '🎮', '💡', '🌿', '🔥']
+// Lucide icon keys (see src/lib/icons.tsx) — not emoji
+export const DEFAULT_ROOM_ICONS = [
+  'home', 'work', 'design', 'study', 'music', 'web',
+  'energy', 'science', 'game', 'idea', 'nature', 'fire',
+]
 
 export const DEFAULT_ROOM_COLORS = [
   '#c8a87a', // oro cálido

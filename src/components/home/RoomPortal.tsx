@@ -1,6 +1,7 @@
 import { m } from 'motion/react'
 import type { Room } from '@/types'
 import { cn } from '@/lib/utils'
+import { RoomIcon } from '@/lib/icons'
 
 interface RoomPortalProps {
   room: Room
@@ -28,13 +29,14 @@ export function RoomPortal({ room, onSelect }: RoomPortalProps) {
     >
       {/* Icon container */}
       <div
-        className="relative flex items-center justify-center w-16 h-16 rounded-2xl text-3xl shadow-sm"
+        className="relative flex items-center justify-center w-16 h-16 rounded-2xl shadow-sm"
         style={{
           backgroundColor: `color-mix(in srgb, ${room.color} 12%, var(--color-surface))`,
           boxShadow: `0 2px 8px color-mix(in srgb, ${room.color} 15%, transparent)`,
+          color: room.color,
         }}
       >
-        {room.icon}
+        <RoomIcon icon={room.icon} size={26} strokeWidth={1.6} />
 
         {/* Active pulse indicator */}
         {isActive && (

@@ -1,6 +1,7 @@
 import { ExternalLink } from 'lucide-react'
 import { useWorkspaceStore } from '@/stores/useWorkspaceStore'
 import { cn } from '@/lib/utils'
+import { ToolIcon } from '@/lib/icons'
 
 export function ConnectionsWidget() {
   const { rooms } = useWorkspaceStore()
@@ -24,8 +25,8 @@ export function ConnectionsWidget() {
           key={`${tool.id}-${i}`}
           className="flex items-center gap-2 py-1"
         >
-          <div className="relative flex-shrink-0">
-            <span className="text-sm">{tool.icon}</span>
+          <div className="relative flex-shrink-0 flex items-center justify-center w-5 h-5">
+            <ToolIcon id={tool.id} size={16} />
             <span
               className={cn(
                 'absolute -bottom-0.5 -right-0.5 w-1.5 h-1.5 rounded-full',
