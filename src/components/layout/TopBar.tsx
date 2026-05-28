@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { Settings, Plus, Zap } from 'lucide-react'
+import { Settings, Plus } from 'lucide-react'
 import { useClock } from '@/hooks/useClock'
 import { useWorkspaceStore } from '@/stores/useWorkspaceStore'
 import { useUserStore } from '@/stores/useUserStore'
