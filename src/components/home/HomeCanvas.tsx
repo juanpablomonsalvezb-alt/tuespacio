@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { m } from 'motion/react'
 import { Plus } from 'lucide-react'
 import NumberFlow from '@number-flow/react'
@@ -10,6 +11,23 @@ import { getWeatherDescription } from '@/lib/weather'
 import { RoomPortal } from './RoomPortal'
 import { AmbientBar } from './AmbientBar'
 
+const MICRO_PHRASES = [
+  'Tu espacio, tus reglas.',
+  'Las herramientas te esperan.',
+  'Todo comienza aquí.',
+  'Un paso a la vez.',
+  'Crea algo increíble.',
+  'El momento es ahora.',
+  'Construye sin límites.',
+  'Tu ritmo, tu camino.',
+]
+
+function getDailyPhrase(): string {
+  const today = new Date()
+  const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate()
+  return MICRO_PHRASES[seed % MICRO_PHRASES.length]
+}
+
 function getGreeting(): string {
   const hour = new Date().getHours()
   if (hour >= 6 && hour < 12) return 'Buenos días'
@@ -18,7 +36,6 @@ function getGreeting(): string {
 }
 
 function parseTime(timeStr: string): { hours: string; minutes: string; suffix: string } {
-  // timeStr is like "4:17 p. m." or "11:51 a. m." from useClock
   const match = timeStr.match(/^(\d{1,2}):(\d{2})\s*(.*)$/)
   if (!match) return { hours: '', minutes: '', suffix: '' }
   return { hours: match[1], minutes: match[2], suffix: match[3] }
@@ -37,6 +54,7 @@ export function HomeCanvas() {
   const greeting = getGreeting()
   const weatherInfo = weather ? getWeatherDescription(weather.weatherCode) : null
   const { hours, minutes, suffix } = parseTime(time)
+  const dailyPhrase = useMemo(() => getDailyPhrase(), [])
 
   const handleRoomSelect = (id: string) => {
     setActiveRoom(id)
@@ -52,13 +70,13 @@ export function HomeCanvas() {
       className="relative flex flex-col items-center justify-center h-full px-6 select-none overflow-hidden"
     >
       {/* Main centered content */}
-      <div className="flex flex-col items-center gap-2 -mt-12">
-        {/* Clock — NumberFlow animated digits */}
+      <div className="flex flex-col items-center -mt-8">
+        {/* Clock — MASSIVE, DM Serif Display, NumberFlow animated digits */}
         <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30, delay: 0.05 }}
-          className="font-display text-8xl sm:text-9xl text-[var(--color-text)] leading-none tracking-tight flex items-baseline"
+          className="font-display text-[8rem] sm:text-[10rem] lg:text-[12rem] text-[var(--color-text)] leading-none tracking-tight flex items-baseline"
         >
           <NumberFlow
             value={parseInt(hours) || 0}
@@ -66,7 +84,7 @@ export function HomeCanvas() {
             transformTiming={{ duration: 750, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
             spinTiming={{ duration: 750, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
           />
-          <span className="mx-1 opacity-40">:</span>
+          <span className="mx-1 colon-pulse">:</span>
           <NumberFlow
             value={parseInt(minutes) || 0}
             format={{ minimumIntegerDigits: 2 }}
@@ -74,28 +92,38 @@ export function HomeCanvas() {
             spinTiming={{ duration: 750, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
           />
           {suffix && (
-            <span className="text-lg sm:text-xl font-sans font-light text-[var(--color-muted)] ml-2 self-end mb-2">
+            <span className="text-lg sm:text-xl font-sans font-light text-[var(--color-muted)] ml-2.5 self-end mb-4">
               {suffix}
             </span>
           )}
         </m.div>
 
-        {/* Greeting + weather row */}
+        {/* Greeting — elegant, light weight */}
         <m.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30, delay: 0.15 }}
-          className="flex items-center gap-3 mt-3"
+          className="text-xl sm:text-2xl font-light text-[var(--color-text-secondary)] mt-2"
         >
-          <span className="text-xl sm:text-2xl font-light text-[var(--color-text-secondary)]">
+          <span>
             {greeting}
             {userName ? `, ${userName}` : ''}
           </span>
+          <span className="cursor-blink ml-0.5 text-[var(--color-accent)]">|</span>
+        </m.div>
 
+        {/* Date + Weather — one integrated line, muted */}
+        <m.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="flex items-center gap-2.5 text-sm text-[var(--color-muted)] capitalize mt-2"
+        >
+          <span>{date}</span>
           {weatherInfo && weather && (
             <>
-              <span className="w-px h-5 bg-[var(--color-border)]" />
-              <span className="flex items-center gap-1.5 text-sm text-[var(--color-muted)]">
+              <span className="text-[var(--color-border-strong)]">/</span>
+              <span className="flex items-center gap-1.5">
                 <span>{weatherInfo.emoji}</span>
                 <span>{weather.temperature}&deg;</span>
               </span>
@@ -103,18 +131,32 @@ export function HomeCanvas() {
           )}
         </m.div>
 
-        {/* Date */}
-        <m.div
+        {/* Daily micro-phrase */}
+        <m.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-sm text-[var(--color-muted)] capitalize mt-0.5"
+          transition={{ duration: 0.6, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="text-xs text-[var(--color-muted)] mt-3 tracking-wide italic"
+          style={{ opacity: 0.6 }}
         >
-          {date}
+          {dailyPhrase}
+        </m.p>
+
+        {/* Section divider — "Cuartos" label */}
+        <m.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={{ opacity: 1, scaleX: 1 }}
+          transition={{ duration: 0.5, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="flex flex-col items-center mt-20"
+        >
+          <span className="text-[10px] uppercase tracking-[0.2em] text-[var(--color-muted)] mb-3">
+            Cuartos
+          </span>
+          <div className="w-48 h-px bg-[var(--color-border)]" />
         </m.div>
 
         {/* Room portals — staggered 50ms per Emil */}
-        <div className="flex items-start gap-2 sm:gap-4 mt-14 flex-wrap justify-center max-w-2xl">
+        <div className="flex items-start gap-3 sm:gap-5 mt-8 flex-wrap justify-center max-w-2xl">
           {rooms.map((room, index) => (
             <m.div
               key={room.id}
@@ -124,14 +166,14 @@ export function HomeCanvas() {
                 type: 'spring',
                 stiffness: 350,
                 damping: 28,
-                delay: 0.35 + index * 0.05,
+                delay: 0.45 + index * 0.05,
               }}
             >
               <RoomPortal room={room} onSelect={handleRoomSelect} />
             </m.div>
           ))}
 
-          {/* Add room button */}
+          {/* Add room button — matches portal style */}
           <m.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -139,7 +181,7 @@ export function HomeCanvas() {
               type: 'spring',
               stiffness: 350,
               damping: 28,
-              delay: 0.35 + rooms.length * 0.05,
+              delay: 0.45 + rooms.length * 0.05,
             }}
           >
             <m.button
@@ -152,18 +194,21 @@ export function HomeCanvas() {
               <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-[var(--color-surface-2)] border border-dashed border-[var(--color-border-strong)]">
                 <Plus size={24} className="text-[var(--color-muted)]" />
               </div>
-              <span className="text-sm font-medium text-[var(--color-muted)]">Nuevo</span>
+              <span className="text-[13px] font-medium text-[var(--color-muted)]">Nuevo</span>
             </m.button>
           </m.div>
         </div>
 
-        {/* Search hint */}
+        {/* Command palette hint */}
         <m.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 0.5, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           onClick={openCommandPalette}
-          className="mt-12 text-xs text-[var(--color-muted)] hover:text-[var(--color-text-secondary)] transition-colors duration-200 cursor-pointer flex items-center gap-1.5"
+          className="mt-16 text-xs text-[var(--color-muted)] hover:text-[var(--color-text-secondary)] cursor-pointer flex items-center gap-1.5"
+          style={{ opacity: 0.5, transition: 'color 0.2s, opacity 0.2s' }}
+          onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.8' }}
+          onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.5' }}
         >
           <kbd className="px-1.5 py-0.5 rounded-md bg-[var(--color-surface-2)] border border-[var(--color-border)] text-[10px] font-mono font-medium">
             ⌘K

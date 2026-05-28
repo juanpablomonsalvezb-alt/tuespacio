@@ -32,6 +32,8 @@
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 20px;
+
+  --ambient-color: rgba(200, 168, 122, 0.06);
 }
 
 *, *::before, *::after {
@@ -72,15 +74,63 @@ body {
 }
 .status-pulse { animation: status-pulse 2s ease-in-out infinite; }
 
+@keyframes colon-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.colon-pulse { animation: colon-pulse 2s ease-in-out infinite; }
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.cursor-blink { animation: cursor-blink 1.2s step-end infinite; }
+
 ::selection {
   background: var(--color-accent-dim);
   color: var(--color-text);
 }
 
+/* Ambient background — time-based gradient + grain texture */
+.ambient-bg {
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 50% 0%, var(--ambient-color) 0%, transparent 70%),
+    var(--color-bg);
+  background-attachment: fixed;
+}
+
+/* Cursor glow — follows mouse via transform only (GPU-composited, no repaint) */
+.cursor-glow::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--ambient-color) 0%, transparent 70%);
+  transform: translate3d(calc(var(--mouse-x, 50vw) - 300px), calc(var(--mouse-y, 50vh) - 300px), 0);
+  will-change: transform;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  transition: opacity 0.4s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-glow::before { display: none; }
+  .colon-pulse, .cursor-blink, .status-pulse { animation: none; }
+}
+
+@media (hover: none) {
+  .cursor-glow::before { display: none; }
+}
+
 .glass {
   background: var(--color-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--color-glass-border);
   box-shadow: var(--shadow-glass);
 }
