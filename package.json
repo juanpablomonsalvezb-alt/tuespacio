@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.2.8",
     "@fontsource/dm-serif-display": "^5.2.8",
+    "@number-flow/react": "^0.6.0",
     "@react-oauth/google": "^0.13.5",
     "@spotify/web-api-ts-sdk": "^1.2.0",
     "@tanstack/react-router": "^1.170.8",
@@ -21,7 +22,9 @@
     "motion": "^12.40.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
+    "sonner": "^2.0.7",
     "tailwind-merge": "^3.6.0",
+    "vaul": "^1.1.2",
     "zustand": "^5.0.13"
   },
   "devDependencies": {

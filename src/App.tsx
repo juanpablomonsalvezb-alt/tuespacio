@@ -1,5 +1,6 @@
 import { useEffect, useCallback } from 'react'
 import { LazyMotion, domAnimation, AnimatePresence } from 'motion/react'
+import { Toaster } from 'sonner'
 import { HomeCanvas } from '@/components/home/HomeCanvas'
 import { RoomView } from '@/components/room/RoomView'
 import { CommandPalette } from '@/components/search/CommandPalette'
@@ -45,6 +46,22 @@ function App() {
       {/* Modals */}
       <CreateRoomModal />
       <SettingsPanel />
+
+      {/* Sonner toasts — Emil Kowalski style */}
+      <Toaster
+        position="bottom-center"
+        toastOptions={{
+          style: {
+            background: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
+            color: 'var(--color-text)',
+            fontSize: '13px',
+            boxShadow: 'var(--shadow-lg)',
+            borderRadius: 'var(--radius-md)',
+          },
+        }}
+        offset={72}
+      />
     </LazyMotion>
   )
 }

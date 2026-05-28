@@ -27,7 +27,6 @@ export function CommandPalette() {
       const engine = currentSession?.lastSearchEngine ?? 'claude'
       setSelectedEngineId(engine)
       setQuery('')
-      // Focus input on next frame
       requestAnimationFrame(() => {
         inputRef.current?.focus()
       })
@@ -70,22 +69,22 @@ export function CommandPalette() {
     <AnimatePresence>
       {commandPaletteOpen && (
         <>
-          {/* Backdrop */}
+          {/* Backdrop — fast fade */}
           <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-            className="fixed inset-0 bg-black/15 backdrop-blur-[3px] z-50"
+            exit={{ opacity: 0, transition: { duration: 0.1 } }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/12 backdrop-blur-[3px] z-50"
             onClick={closeCommandPalette}
           />
 
-          {/* Palette */}
+          {/* Palette — spring enter, fast exit (asymmetric per Emil) */}
           <m.div
-            initial={{ opacity: 0, scale: 0.95, y: -10 }}
+            initial={{ opacity: 0, scale: 0.96, y: -8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-            transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+            exit={{ opacity: 0, scale: 0.98, y: -4, transition: { duration: 0.12 } }}
+            transition={{ type: 'spring', stiffness: 500, damping: 32 }}
             className="fixed top-[28%] left-1/2 -translate-x-1/2 z-50 w-full max-w-lg px-4"
           >
             <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] overflow-hidden">
@@ -120,14 +119,17 @@ export function CommandPalette() {
                 />
               </div>
 
-              {/* Engine selector */}
+              {/* Engine selector — pills */}
               <div className="px-4 pb-3 flex items-center gap-1.5 flex-wrap">
                 {SEARCH_ENGINES.map((engine) => (
-                  <button
+                  <m.button
                     key={engine.id}
                     onClick={() => selectEngine(engine.id)}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                     className={cn(
-                      'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-150 cursor-pointer',
+                      'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer',
+                      'transition-colors duration-150',
                       engine.id === selectedEngineId
                         ? 'text-white shadow-[var(--shadow-sm)]'
                         : 'text-[var(--color-muted)] bg-[var(--color-surface-2)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'
@@ -150,7 +152,7 @@ export function CommandPalette() {
                       }
                     />
                     {engine.name}
-                  </button>
+                  </m.button>
                 ))}
               </div>
 

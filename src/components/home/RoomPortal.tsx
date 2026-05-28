@@ -14,24 +14,24 @@ export function RoomPortal({ room, onSelect }: RoomPortalProps) {
   return (
     <m.button
       onClick={() => onSelect(room.id)}
-      whileHover={{ scale: 1.06, y: -4 }}
+      whileHover={{ scale: 1.05, y: -3 }}
       whileTap={{ scale: 0.97 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       className={cn(
         'flex flex-col items-center gap-3 p-5 rounded-[var(--radius-xl)] cursor-pointer',
-        'transition-shadow duration-300 select-none outline-none',
-        'hover:shadow-[var(--shadow-hover)]',
+        'select-none outline-none',
         'focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/40'
       )}
       style={{
-        backgroundColor: `color-mix(in srgb, ${room.color} 8%, var(--color-surface))`,
+        backgroundColor: `color-mix(in srgb, ${room.color} 6%, var(--color-bg))`,
       }}
     >
       {/* Icon container */}
       <div
-        className="relative flex items-center justify-center w-16 h-16 rounded-2xl text-3xl"
+        className="relative flex items-center justify-center w-16 h-16 rounded-2xl text-3xl shadow-sm"
         style={{
-          backgroundColor: `color-mix(in srgb, ${room.color} 14%, var(--color-surface))`,
+          backgroundColor: `color-mix(in srgb, ${room.color} 12%, var(--color-surface))`,
+          boxShadow: `0 2px 8px color-mix(in srgb, ${room.color} 15%, transparent)`,
         }}
       >
         {room.icon}
@@ -39,14 +39,19 @@ export function RoomPortal({ room, onSelect }: RoomPortalProps) {
         {/* Active pulse indicator */}
         {isActive && (
           <span
-            className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full status-pulse"
+            className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full ring-2 ring-[var(--color-bg)]"
             style={{ backgroundColor: room.color }}
-          />
+          >
+            <span
+              className="absolute inset-0 rounded-full status-pulse"
+              style={{ backgroundColor: room.color }}
+            />
+          </span>
         )}
       </div>
 
       {/* Room name */}
-      <span className="text-sm font-medium text-[var(--color-text)] leading-tight text-center max-w-[100px] truncate">
+      <span className="text-[13px] font-medium text-[var(--color-text)] leading-tight text-center max-w-[100px]">
         {room.name}
       </span>
 
@@ -56,17 +61,17 @@ export function RoomPortal({ room, onSelect }: RoomPortalProps) {
           <>
             {room.tools
               .filter((t) => t.connected)
-              .slice(0, 3)
+              .slice(0, 4)
               .map((t) => (
                 <span
                   key={t.id}
                   className="w-1.5 h-1.5 rounded-full"
-                  style={{ backgroundColor: room.color, opacity: 0.7 }}
+                  style={{ backgroundColor: room.color, opacity: 0.6 }}
                 />
               ))}
-            {connectedCount > 3 && (
-              <span className="text-[10px] text-[var(--color-muted)] leading-none">
-                +{connectedCount - 3}
+            {connectedCount > 4 && (
+              <span className="text-[10px] text-[var(--color-muted)] leading-none ml-0.5">
+                +{connectedCount - 4}
               </span>
             )}
           </>
