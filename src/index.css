@@ -7,31 +7,31 @@
   --font-body: 'Bricolage Grotesque Variable', system-ui, sans-serif;
   --font-sans: 'Bricolage Grotesque Variable', system-ui, sans-serif;
 
-  /* Fondos: blanco limpio */
-  --color-bg: #FBFBFC;
-  --color-bg-deep: #F4F4F5;
+  /* Fondos: blanco Notion + grises cálidos */
+  --color-bg: #FFFFFF;
+  --color-bg-deep: #F7F6F3;
   --color-surface: #FFFFFF;
-  --color-surface-2: #F4F4F6;
+  --color-surface-2: #F6F5F4;
 
-  /* Texto: zinc oscuro, no negro puro */
-  --color-text: #18181B;
-  --color-text-muted: #52525B;
-  --color-text-faint: #A1A1AA;
+  /* Texto: casi negro cálido Notion */
+  --color-text: #37352F;
+  --color-text-muted: #615D59;
+  --color-text-faint: #908C85;
 
-  /* Bordes: zinc claros */
-  --color-border: #E4E4E7;
-  --color-border-strong: #D4D4D8;
+  /* Bordes: gris cálido Notion */
+  --color-border: #E9E8E5;
+  --color-border-strong: #DFDCD9;
 
-  /* Acento: violeta-índigo fuerte */
-  --color-accent: #5B5BD6;
-  --color-accent-hover: #4E4EC4;
-  --color-accent-soft: #ECECFB;
+  /* Acento: azul Notion (usado con avaricia, solo CTA/links) */
+  --color-accent: #2383E2;
+  --color-accent-hover: #0075DE;
+  --color-accent-soft: #E7F1F9;
 
-  /* Soporte (neutros + un verde sobrio para "libre/ok") */
-  --color-sage: #4F4FC4;
-  --color-sage-soft: #ECECFB;
-  --color-gold: #71717A;
-  --color-gold-soft: #F4F4F6;
+  /* Soporte: todo neutro cálido (Notion casi no usa color) */
+  --color-sage: #615D59;
+  --color-sage-soft: #F0EFED;
+  --color-gold: #615D59;
+  --color-gold-soft: #F0EFED;
 
   /* Radio */
   --radius-sm: 12px;
@@ -39,12 +39,12 @@
   --radius-lg: 22px;
   --radius-xl: 28px;
 
-  /* Sombras neutras limpias */
-  --shadow-sm: 0 1px 2px rgba(24,24,27,.05);
-  --shadow-md: 0 4px 16px -4px rgba(24,24,27,.10);
-  --shadow-lg: 0 16px 48px -12px rgba(24,24,27,.16);
-  --shadow-chunky: 4px 5px 0 var(--color-border-strong);
-  --glow-gold: 0 0 48px -10px rgba(91,91,214,.22);
+  /* Sombras Notion — sutiles, multi-capa, casi imperceptibles */
+  --shadow-sm: 0 1px 2px rgba(15,15,15,.05);
+  --shadow-md: rgba(15,15,15,.04) 0 0 0 1px, rgba(15,15,15,.06) 0 3px 6px, rgba(15,15,15,.08) 0 9px 24px;
+  --shadow-lg: rgba(15,15,15,.05) 0 0 0 1px, rgba(15,15,15,.08) 0 8px 24px, rgba(15,15,15,.10) 0 16px 48px;
+  --shadow-chunky: 0 1px 2px rgba(15,15,15,.1);
+  --glow-gold: none;
 }
 
 html {
@@ -80,9 +80,10 @@ body {
   border-bottom: 1px dashed var(--color-border);
 }
 
-/* Banda de acento sutil en header (firma limpia) */
+/* Header Notion: gris cálido muy sutil, sin color */
 .golden-band {
-  background: radial-gradient(130% 150% at 90% -30%, var(--color-accent-soft) 0%, var(--color-surface) 55%);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
 }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
