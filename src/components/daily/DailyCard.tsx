@@ -63,7 +63,7 @@ export function DailyCard() {
         initial={{ opacity: 0, y: 24, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: 'spring', stiffness: 260, damping: 26 }}
-        className="w-[380px] max-w-[92vw] rounded-[var(--radius-xl)] overflow-hidden"
+        className="w-[380px] max-w-[92vw] rounded-[var(--radius-lg)] overflow-hidden"
         style={{
           backgroundColor: 'var(--color-surface)',
           border: '1px solid var(--color-border)',
@@ -76,13 +76,16 @@ export function DailyCard() {
             Tu día · {DATA.date}
           </p>
           <h1
-            className="font-display text-[var(--color-text)] leading-[1.1] mt-2"
-            style={{ fontSize: '1.9rem', fontStyle: 'italic', fontWeight: 500 }}
+            className="text-[var(--color-text)] leading-[1.15] mt-2"
+            style={{ fontSize: '1.55rem', fontWeight: 600, letterSpacing: '-0.025em' }}
           >
             {DATA.greeting}, {DATA.name}.
           </h1>
-          <p className="font-display text-[var(--color-accent)] mt-1" style={{ fontSize: '1.05rem' }}>
-            Quedan {DATA.exams[0].dias} días para {DATA.exams[0].ramo}.
+          <p
+            className="text-[var(--color-text-muted)] mt-1.5"
+            style={{ fontSize: '0.9375rem', fontWeight: 450, letterSpacing: '-0.01em' }}
+          >
+            Quedan <span className="tabular font-semibold text-[var(--color-accent)]">{DATA.exams[0].dias} días</span> para {DATA.exams[0].ramo}.
           </p>
         </div>
 
@@ -98,7 +101,7 @@ export function DailyCard() {
               {DATA.exams.map((e) => (
                 <StickerChip
                   key={e.ramo}
-                  icon={<span className="font-bold">{e.dias}d</span>}
+                  icon={<span className="tabular font-bold">{e.dias}d</span>}
                   label={e.ramo}
                   tone="accent"
                 />
@@ -112,8 +115,8 @@ export function DailyCard() {
           {/* Clima */}
           <section>
             <h2 className="notebook-rule pb-1.5 mb-3 flex items-center gap-2 text-[13px] font-bold uppercase tracking-wide text-[var(--color-text-muted)]">
-              <CloudRain size={14} className="text-[var(--color-sage)]" />
-              Hoy: {DATA.weather.label} · {DATA.weather.temp}°
+              <CloudRain size={14} className="text-[var(--color-text-muted)]" />
+              Hoy: {DATA.weather.label} · <span className="tabular">{DATA.weather.temp}°</span>
             </h2>
             <p className="text-[13px] text-[var(--color-text-muted)] leading-snug">
               {DATA.weather.tip}
@@ -169,7 +172,7 @@ export function DailyCard() {
           className="px-7 py-3 flex items-center justify-between"
           style={{ borderTop: '1px dashed var(--color-border)' }}
         >
-          <span className="font-display text-[15px] italic text-[var(--color-text)]">
+          <span className="text-[14px] font-semibold text-[var(--color-text)]" style={{ letterSpacing: '-0.02em' }}>
             tuespacio
           </span>
           <span className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-text-faint)]">

@@ -1,11 +1,10 @@
 @import "tailwindcss";
-@import "@fontsource-variable/fraunces/index.css";
-@import "@fontsource-variable/bricolage-grotesque/index.css";
+@import "@fontsource-variable/inter/index.css";
 
 @theme {
-  --font-display: 'Fraunces Variable', Georgia, serif;
-  --font-body: 'Bricolage Grotesque Variable', system-ui, sans-serif;
-  --font-sans: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  --font-display: 'Inter Variable', system-ui, sans-serif;
+  --font-body: 'Inter Variable', system-ui, sans-serif;
+  --font-sans: 'Inter Variable', system-ui, sans-serif;
 
   /* Fondos: blanco Notion + grises cálidos */
   --color-bg: #FFFFFF;
@@ -54,6 +53,19 @@ html {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
+  font-feature-settings: "cv11" 1, "ss01" 1;
+  letter-spacing: -0.011em;
+}
+
+/* Títulos: tracking negativo = el detalle que mata el look "Word 90s" */
+h1, h2, h3, .tracking-tight-premium {
+  letter-spacing: -0.021em;
+}
+
+/* Números de datos: tabular para alinear (grados, días, temps) */
+.tabular {
+  font-feature-settings: "tnum" 1, "cv11" 1;
+  font-variant-numeric: tabular-nums;
 }
 
 body {
