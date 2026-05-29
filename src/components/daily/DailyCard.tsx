@@ -42,7 +42,7 @@ function StickerChip({
     tone === 'sage'
       ? 'var(--color-sage)'
       : tone === 'gold'
-        ? '#9A7420'
+        ? 'var(--color-text-muted)'
         : 'var(--color-accent)'
   return (
     <span
@@ -148,7 +148,7 @@ export function DailyCard() {
             >
               <div
                 className="flex items-center justify-center w-9 h-9 rounded-[var(--radius-sm)] flex-shrink-0"
-                style={{ backgroundColor: 'var(--color-gold-soft)', color: '#9A7420' }}
+                style={{ backgroundColor: 'var(--color-surface-2)', color: 'var(--color-text-muted)' }}
               >
                 <Clapperboard size={17} />
               </div>
@@ -187,7 +187,7 @@ export function DailyCard() {
         className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[var(--radius-pill)] font-semibold text-[14px] cursor-pointer"
         style={{
           backgroundColor: 'var(--color-accent)',
-          color: '#FBF5EA',
+          color: '#FFFFFF',
           boxShadow: 'var(--shadow-chunky)',
         }}
       >

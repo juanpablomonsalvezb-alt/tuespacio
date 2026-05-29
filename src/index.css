@@ -7,31 +7,31 @@
   --font-body: 'Bricolage Grotesque Variable', system-ui, sans-serif;
   --font-sans: 'Bricolage Grotesque Variable', system-ui, sans-serif;
 
-  /* Fondos: papel cálido, nunca blanco puro */
-  --color-bg: #F4EBDD;
-  --color-bg-deep: #EADFCB;
-  --color-surface: #FBF5EA;
-  --color-surface-2: #F0E4D0;
+  /* Fondos: blanco limpio */
+  --color-bg: #FBFBFC;
+  --color-bg-deep: #F4F4F5;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F4F4F6;
 
-  /* Texto: tinta nogal */
-  --color-text: #3A2E25;
-  --color-text-muted: #7A6A58;
-  --color-text-faint: #A89881;
+  /* Texto: zinc oscuro, no negro puro */
+  --color-text: #18181B;
+  --color-text-muted: #52525B;
+  --color-text-faint: #A1A1AA;
 
-  /* Bordes */
-  --color-border: #DEC9A8;
-  --color-border-strong: #C9B088;
+  /* Bordes: zinc claros */
+  --color-border: #E4E4E7;
+  --color-border-strong: #D4D4D8;
 
-  /* Acento: terracota */
-  --color-accent: #C06B4A;
-  --color-accent-hover: #A8543A;
-  --color-accent-soft: #EBD4C4;
+  /* Acento: violeta-índigo fuerte */
+  --color-accent: #5B5BD6;
+  --color-accent-hover: #4E4EC4;
+  --color-accent-soft: #ECECFB;
 
-  /* Soporte */
-  --color-sage: #8A9A7B;
-  --color-sage-soft: #DDE4D4;
-  --color-gold: #D9A441;
-  --color-gold-soft: #F3E3C0;
+  /* Soporte (neutros + un verde sobrio para "libre/ok") */
+  --color-sage: #4F4FC4;
+  --color-sage-soft: #ECECFB;
+  --color-gold: #71717A;
+  --color-gold-soft: #F4F4F6;
 
   /* Radio */
   --radius-sm: 12px;
@@ -39,12 +39,12 @@
   --radius-lg: 22px;
   --radius-xl: 28px;
 
-  /* Sombras cálidas (marrón, no gris) */
-  --shadow-sm: 0 1px 2px rgba(58,46,37,.06);
-  --shadow-md: 0 6px 20px -6px rgba(80,55,35,.18);
-  --shadow-lg: 0 16px 40px -12px rgba(80,55,35,.28);
+  /* Sombras neutras limpias */
+  --shadow-sm: 0 1px 2px rgba(24,24,27,.05);
+  --shadow-md: 0 4px 16px -4px rgba(24,24,27,.10);
+  --shadow-lg: 0 16px 48px -12px rgba(24,24,27,.16);
   --shadow-chunky: 4px 5px 0 var(--color-border-strong);
-  --glow-gold: 0 0 48px -8px rgba(217,164,65,.4);
+  --glow-gold: 0 0 48px -10px rgba(91,91,214,.22);
 }
 
 html {
@@ -80,9 +80,9 @@ body {
   border-bottom: 1px dashed var(--color-border);
 }
 
-/* Halo dorado de hora dorada */
+/* Banda de acento sutil en header (firma limpia) */
 .golden-band {
-  background: radial-gradient(120% 140% at 88% -25%, #F7E3C2 0%, var(--color-surface) 58%);
+  background: radial-gradient(130% 150% at 90% -30%, var(--color-accent-soft) 0%, var(--color-surface) 55%);
 }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
