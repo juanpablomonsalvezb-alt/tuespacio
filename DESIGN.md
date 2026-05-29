@@ -1,145 +1,129 @@
-# tuespacio — Constitución de Diseño (LEY, no sugerencia)
+# tuespacio — Constitución de Diseño v2 (LEY)
 
-> Este documento es la única fuente de verdad visual. **Toda pantalla se revisa contra el checklist de rechazo antes de darse por hecha.** Si falla un solo ítem, no se entrega. El diseño genérico fue siempre por ausencia de sistema — esto es el sistema.
-
----
-
-## 0. Qué es el producto (define toda decisión)
-
-**tuespacio = Cuarto de Control de Agentes.** Un inbox calmo y cross-vendor donde un dev ve qué hacen sus agentes AI (Claude Code, Cursor, MCP, webhooks), qué terminó, qué necesita aprobación, qué se rompió — en una sola superficie.
-
-**NO es**: un dashboard personal bonito, un Notion, un new-tab page. Eso murió. Es una **herramienta de dev densa en datos**. La densidad ES la estética. El lujo es la precisión, no la decoración.
+> Única fuente de verdad visual. Cada pantalla se revisa contra el checklist de rechazo antes de entregarse. Si falla un ítem, no se entrega. El diseño salió genérico antes por falta de sistema y de concepto. Ahora hay ambos.
 
 ---
 
-## 1. Referencia ÚNICA y obligatoria: **Linear**
+## 0. Qué es el producto
 
-Una sola referencia. No "inspiración de 10 sitios". Cada decisión se justifica contra **Linear** (linear.app). Secundarias solo para confirmar: Vercel/Geist (mono para datos), Resend (limpieza). Nada más.
+**tuespacio = espacio digital pre-armado por perfil.** Primer perfil: **universitario**. El estudiante abre y su espacio YA está armado (cero página en blanco, cero `/`). Conecta sus apps existentes (calendario, Spotify, clima, Netflix, ramos) y el sistema las CRUZA en un **"aviso del día" inteligente** (motor de reglas, costo $0):
 
-Si una decisión no se parece a Linear → está mal por default.
+> *"Ojo — 2 certámenes la próxima semana, tu rendimiento bajó, organízate. Ese día llueve (tips). ¿Música para estudiar? Hay un documental en Netflix que complementa tu ramo."*
+
+**El motor de crecimiento**: el espacio genera una **"Carta del día" hermosa y compartible** (formato 9:16) que el estudiante postea en studygram/TikTok → otros la ven → "quiero la mía". El producto se distribuye solo. **Si no es hermoso, no se comparte, no hay negocio. El diseño ES el producto.**
 
 ---
 
-## 2. Tokens — única fuente de verdad (copiar a `src/index.css`)
+## 1. Dirección visual: FUSIÓN A+B = "Warm Academia con energía compartible"
+
+Cozy pero vivo. Íntimo pero se postea. La calidez de un escritorio de madera a la hora dorada (A) + la energía expresiva y el motor viral de Gen-Z (B) — pero **toda la energía teñida en paleta cálida, NUNCA neón.**
+
+**Regla madre de la fusión:**
+- De **A** tomamos: paleta cálida, papel, serif literario, halo dorado, intimidad
+- De **B** tomamos: la ESTRUCTURA (card 9:16 compartible, chips tipo sticker, sombras "presionables", micro-rebote, lo screenshot-native)
+- **NUNCA** tomamos de B: los neones (`#6C4DF6`, `#FF5FA2`...). Los chips de sticker van en terracota/oro/salvia.
+
+---
+
+## 2. Tokens — única fuente de verdad (a `src/index.css`)
 
 ```css
 @theme {
-  /* ===== DARK-FIRST. La profundidad viene del LADDER de superficie, NO de sombras ===== */
-  --color-bg:        #08090A;  /* app, lo más profundo */
-  --color-surface:   #0F1011;  /* paneles */
-  --color-elevated:  #16171A;  /* cards */
-  --color-hover:     #1C1D21;  /* hover de card/fila */
+  /* ===== Fondos: papel cálido, nunca blanco puro ===== */
+  --color-bg:        #F4EBDD;  /* crema papel envejecido */
+  --color-bg-deep:   #EADFCB;  /* paneles bajos */
+  --color-surface:   #FBF5EA;  /* card levantada */
+  --color-surface-2: #F0E4D0;  /* inset / wells */
 
-  /* Texto — 3 niveles, jamás más */
-  --color-text:        #F7F8F8;
-  --color-text-secondary: #9CA0A8;
-  --color-text-tertiary:  #62666D;
+  /* Texto: tinta nogal, jamás negro puro */
+  --color-text:        #3A2E25;
+  --color-text-muted:  #7A6A58;
+  --color-text-faint:  #A89881;
 
-  /* UN acento. Indigo. Solo acción primaria + focus ring + estado activo. <10% superficie */
-  --color-accent:       #5E6AD2;
-  --color-accent-hover: #6E79DD;
+  /* Bordes: hairline tinta-de-té */
+  --color-border:        #DEC9A8;
+  --color-border-strong: #C9B088;
 
-  /* Estados semánticos — usados SOLO en indicadores de estado de agente, no decoración */
-  --color-running: #5E6AD2;  /* corriendo (indigo) */
-  --color-done:    #3FB950;  /* terminó (verde sobrio) */
-  --color-wait:    #D29922;  /* necesita aprobación (ámbar) */
-  --color-failed:  #F85149;  /* falló (rojo) */
+  /* Acento: terracota */
+  --color-accent:       #C06B4A;
+  --color-accent-hover: #A8543A;
+  --color-accent-soft:  #EBD4C4;  /* chips/badges tintados */
 
-  /* Bordes — hairline por opacidad. Separan superficies ANTES que cualquier sombra */
-  --border:        rgba(255,255,255,0.08);
-  --border-strong: rgba(255,255,255,0.12);
+  /* Soporte (con avaricia, solo en estados/chips) */
+  --color-sage: #8A9A7B;  /* "estás libre" / calma */
+  --color-gold: #D9A441;  /* sol/clima/highlight hora dorada */
 
-  /* Tipografía */
-  --font-sans: "Inter", -apple-system, system-ui, sans-serif;
-  --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
-  --fs-xs: 12px; --fs-sm: 13px; --fs-base: 14px; --fs-lg: 16px; --fs-xl: 20px; --fs-2xl: 28px;
-  --fw-regular: 400; --fw-medium: 510; --fw-semibold: 590;  /* pesos custom, NO 500/600 stock */
+  /* Tipografía: serif literario + sans moderno */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Bricolage Grotesque', system-ui, sans-serif;
 
-  /* Espaciado — base 4px, usar con TENSIÓN (denso en datos, aireado entre secciones) */
-  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-6:24px; --sp-8:32px;
+  /* Escala (densa donde hay datos, aireada entre secciones) */
+  --fs-greeting: 1.75rem; --fs-h1: 2.25rem; --fs-h2: 1.5rem;
+  --fs-body: 1rem; --fs-meta: 0.8125rem; --fs-label: 0.72rem;
 
-  /* UN radio. 6px en todo. (cards pueden 8px, nada más) */
-  --r: 6px; --r-lg: 8px;
+  /* Radio: generoso, suave, jamás filoso */
+  --r-sm: 12px; --r-md: 16px; --r-lg: 22px; --r-pill: 999px;
 
-  /* Motion — rápido, funcional, jamás decorativo */
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --dur-fast: 100ms; --dur-base: 150ms;
+  /* Sombras: cálidas (marrón, NO gris). Luz = lámpara de escritorio */
+  --shadow-sm: 0 1px 2px rgba(58,46,37,.06);
+  --shadow-md: 0 6px 20px -6px rgba(80,55,35,.18);
+  --shadow-chunky: 4px 5px 0 var(--color-border-strong); /* de B, suavizado a cálido */
+  --glow-gold: 0 0 40px -8px rgba(217,164,65,.35);
 
-  /* Sombra — SOLO para overlays/popovers reales. Nunca en cards de la grilla */
-  --shadow-popover: 0 8px 24px rgba(0,0,0,0.5);
+  /* Motion: rebote sutil (de B) pero contenido */
+  --ease-bounce: cubic-bezier(.34, 1.4, .64, 1);
+  --ease: cubic-bezier(.32,.72,0,1);
+  --dur-fast: 120ms; --dur-base: 200ms;
 }
 ```
 
----
-
-## 3. Las 5 no-negociables que separan élite de genérico
-
-1. **Profundidad por surface-ladder, NO sombras.** Cards = fondo un paso más claro. Cero `shadow-md/lg/xl`.
-2. **Monospace para TODO dato técnico** — IDs de run, timestamps, hashes, nombres de branch, rutas, métricas, payloads. Es el tell #1 de herramienta seria.
-3. **UN acento, usado con avaricia.** Indigo solo en: botón primario, focus ring, estado "corriendo". Nada más lleva color (salvo los 4 estados de agente).
-4. **13–14px base. JAMÁS 16px.** Denso, profesional. Inter en pesos 510/590, no 500/600.
-5. **Bordes hairline 8% + motion <150ms.** Nada rebota, nada decora, nada hace "bounce".
+Grano de papel ~4% sobre el fondo. Halo dorado SOLO en la card hero.
 
 ---
 
-## 4. Layout — anclado, no centrado
+## 3. Las firmas (lo que lo hace inconfundible)
 
-- **Prohibido `flex items-center justify-center` como layout principal.** Eso es el tell #1 de AI.
-- Estructura de cuarto de control: **sidebar izquierda angosta** (fuentes/filtros) + **lista densa de runs** (columna principal, anclada izquierda) + **panel de detalle** (derecha, aparece al seleccionar).
-- Grilla de 12 columnas. Contenido alineado a la izquierda. Números y timestamps alineados a una base monoespaciada.
-- La lista de agentes/runs es el héroe — filas densas tipo Linear issues, no cards gigantes.
-
----
-
-## 5. Componentes núcleo (especificados)
-
-- **Fila de Run**: altura ~40px. `[dot estado] [nombre agente mono] [título] [fuente] [timestamp mono] [duración mono]`. Hover = `--color-hover`. Borde inferior hairline. Densa.
-- **Dot de estado**: 8px. Color = estado. "Corriendo" pulsa sutil (opacity, ≤2s). El resto estático.
-- **Card de aprobación**: la ÚNICA pieza con peso visual. Borde `--color-accent` a baja opacidad, fondo `--color-elevated`, botones Approve (accent) / Reject (ghost). Mono para el comando/acción propuesta.
-- **Badges de estado**: pill, texto 12px, fondo = `color-mix(estado 12%, surface)`, texto = estado. Sin gradiente.
-- **Botón primario**: fondo `--color-accent`, texto blanco, peso 590, radio 6px, `:active` scale 0.97, transición 100ms. Único botón con color.
-- **Todo lo demás**: ghost (texto secundario, hover = surface-2).
+1. **Banda de luz dorada** (de A): gradiente radial cálido cae desde arriba-derecha detrás del saludo — sol de tarde sobre madera. `radial-gradient(120% 140% at 90% -20%, #F7E3C2, #F4EBDD 55%)` + `--glow-gold`.
+2. **Línea punteada bajo títulos** (de A): `border-bottom: 1px dashed var(--color-border)` — papel de cuaderno.
+3. **La "Carta del día" compartible** (de B): card 9:16 screenshot-perfect, con chips tipo sticker (countdown examen, clima, Spotify, Netflix) en tonos cálidos, contorno suave, 1 tap → exporta imagen. **ESTE es el motor viral.**
+4. **Chips presionables** (de B teñido): `box-shadow: var(--shadow-chunky)`, `:active` hunde el chip. Pero en crema/terracota, no neón.
 
 ---
 
-## 6. Íconos
+## 4. Tipografía con alma
 
-- **Lucide únicamente.** Un solo set, un solo stroke-width (1.5). Tamaño 14-16px en UI.
-- Logos de marca (`@lobehub/icons` color, `react-icons/si`) SOLO para identificar la fuente del agente (Claude, Cursor, OpenAI) — en mono/pequeño, nunca grande/decorativo.
-- **CERO emoji.** En ningún lado. Nunca.
-
----
-
-## 7. CHECKLIST DE RECHAZO — rechazar si tiene CUALQUIERA
-
-- [ ] Contenido principal centrado (`items-center justify-center`) sin razón funcional
-- [ ] Gradiente / aurora / mesh / blob / glow decorativo
-- [ ] Fondo claro (este producto es dark-first)
-- [ ] Un solo emoji en cualquier parte
-- [ ] `shadow-md`/`lg`/`xl` de Tailwind sin customizar, o sombra en cards de grilla
-- [ ] Más de un radio de borde (todo es 6px, cards 8px)
-- [ ] Más de 2 familias tipográficas, o serif para datos/reloj
-- [ ] Datos técnicos (IDs, timestamps, duración) NO en monospace
-- [ ] Más de 1 acento de color (fuera de los 4 estados de agente)
-- [ ] `backdrop-blur`/glass sin propósito funcional
-- [ ] Cards grandes con placeholder en vez de datos densos reales
-- [ ] Espaciado 100% uniforme (todo `gap-4`/`p-6`) sin tensión denso/aireado
-- [ ] Base tipográfica de 16px (debe ser 13-14px)
-- [ ] Animación decorativa o >150ms
-- [ ] Mezcla de stroke-width o sets de íconos
+- **Fraunces** (serif, cursiva en saludos): da el alma académica/literaria. Saludos, números grandes, títulos.
+- **Bricolage Grotesque** (sans): UI, datos, body. Moderno, evita que se vuelva disfraz nostálgico.
+- Saludo siempre en Fraunces cursiva: *"Buenas tardes, Juan"*.
 
 ---
 
-## 8. Cómo lograr que se sienta autorado
+## 5. CHECKLIST DE RECHAZO — rechazar si tiene CUALQUIERA
 
-1. Tokens ANTES que JSX. Ningún valor mágico en componentes.
-2. Empezar por la **vista más densa** (la lista de runs), nunca por un "hero".
-3. Quitar hasta que duela. Después quitar uno más.
-4. UNA decisión memorable (ej: el dot de estado pulsante, o la card de aprobación) ejecutada con precisión. Solo una.
-5. Revisar contra el checklist. Si falla, no se entrega.
+- [ ] Fondo blanco puro `#FFFFFF` o negro puro (debe ser papel cálido)
+- [ ] Color neón / saturado frío (violeta `#6C4DF6`, etc) — los chips van en cálido
+- [ ] Sombra gris (debe ser cálida marrón) o `shadow-md/lg/xl` de Tailwind crudo
+- [ ] Emoji usado como ícono de sistema (los emoji SOLO permitidos dentro de la Carta compartible como stickers expresivos)
+- [ ] Más de un radio base mezclado sin criterio
+- [ ] Datos técnicos sin jerarquía / sin la línea punteada de cuaderno en títulos
+- [ ] La Carta del día NO se ve screenshot-worthy (si no da ganas de postearla, está mal)
+- [ ] Más de: 1 acento (terracota) + 2 soportes (salvia, oro). Nada de arcoíris
+- [ ] Layout centrado vacío sin contenido real (debe haber datos del estudiante)
+- [ ] Serif usado para body/datos (Fraunces solo display/saludo)
+- [ ] Animación >200ms o decorativa sin función
+- [ ] Se siente corporate/SaaS genérico en vez de "escritorio de estudiante"
 
 ---
 
-## 9. Lo que se MATA del diseño anterior (explícito)
+## 6. Cómo lograr que se sienta autorado
 
-Reloj DM Serif gigante · aurora mesh · glass ambient bar · room portals · paleta cálida light · frases diarias · cursor glow · fondo `#fafaf9`. **Todo fuera.** Eran decoración sin función. El producto nuevo es denso, oscuro, preciso, dev-grade.
+1. Tokens antes que JSX.
+2. Empezar por la **Carta del día** (el corazón + el motor viral), no por un hero vacío.
+3. Quitar hasta que duela.
+4. La prueba final de cada pantalla: **¿un universitario haría screenshot de esto y lo postearía?** Si no → no está listo.
+
+---
+
+## 7. Lo que se MATA del diseño anterior
+
+Reloj DM Serif gigante centrado · aurora mesh genérica · glass ambient bar · room portals vacíos · paleta fría/gris · cursor glow · íconos emoji de sistema · todo lo "agent control room" (ese pivote murió). El producto ahora es: **espacio de estudiante, cálido, con aviso inteligente y carta compartible.**
